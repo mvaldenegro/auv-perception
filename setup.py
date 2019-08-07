@@ -22,7 +22,7 @@ setup(name='auv_perception',
       long_description=long_description,
       author='Matias Valdenegro-Toro',
       author_email='matias.valdenegro@gmail.com',
-      url='https://github.com/mvaldenegro/auv_perception',
+      url='https://github.com/mvaldenegro/auv-perception',
       license='LGPLv3',
       install_requires=['keras>=2.2.0', 'numpy', 'Pillow', 'matplotlib'],
       packages=find_packages()
