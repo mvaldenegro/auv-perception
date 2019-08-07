@@ -81,7 +81,7 @@ def readXML(fileName):
 import h5py
 import numpy as np
 
-from scipy.ndimage import imread
+from imageio import imread
 
 labelType = np.dtype([("class", h5py.special_dtype(vlen = str)), ("topLeftX", np.uint32),
                       ("topLeftY", np.uint32), ("width", np.uint32),
@@ -126,7 +126,7 @@ class HDF5LabelsFile:
     def setImagesFromFileNames(self, imageFileNames):
         i = 0
         for imageFileName in imageFileNames:
-            imageData = imread(imageFileName, mode = "L")
+            imageData = imread(imageFileName, pilmode = "L")
 
             self.images[i] = imageData
             self.labels[i] = (imageFileName, [])

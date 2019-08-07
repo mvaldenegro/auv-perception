@@ -7,10 +7,11 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten, BatchNormalization
 from keras.layers import Convolution2D, MaxPooling2D
 
-from scipy.misc import imresize
 from math import sqrt
 
 from .objectProposals import ProposalEvaluator
+
+from ..compat import imresize
 
 class CNNProposalBinaryEvaluator(ProposalEvaluator):
     def __init__(self, weightsFile = None):

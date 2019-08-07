@@ -9,7 +9,7 @@ import matplotlib.cm as cm
 import numpy as np
 import tempfile
 
-from scipy.misc import imread
+from imageio import imread
 
 from auv_perception.annotation import Rectangle
 
@@ -83,7 +83,7 @@ def renderPolarMask(frameSize, ranges = (0.7, 1.7), fov = (-15, 15)):
     fig.savefig(tmpFile, format = "png", bbox_inches = 'tight', facecolor = 'white')
     plt.close(fig)
 
-    output = imread(tmpFile, flatten = True)
+    output = imread(tmpFile, as_gray = True)
 
     for x in range(output.shape[0]):
         for y in range(output.shape[1]):
@@ -99,7 +99,7 @@ def renderPolarMask(frameSize, ranges = (0.7, 1.7), fov = (-15, 15)):
     return output.astype(np.uint8)
 
 
-from scipy.misc import imresize
+from ..compat import imresize
 
 """
 Runs a sliding window over a polar image, skipping all windows
