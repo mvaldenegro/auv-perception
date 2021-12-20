@@ -81,7 +81,7 @@ class NorthPolarAxes(PolarAxes):
 register_projection(NorthPolarAxes)
 
 def fractional_polar_axes(f, thlim=(0, 180), rlim=(0, 1), step=(30, 0.2),
-                          thlabel='theta', rlabel='r', ticklabels=True):
+                          thlabel='theta', rlabel='r', ticklabels=False):
     """Return polar axes that adhere to desired theta (in deg) and r limits. steps for theta
     and r are really just hints for the locators."""
     th0, th1 = thlim # deg
@@ -117,8 +117,8 @@ def fractional_polar_axes(f, thlim=(0, 180), rlim=(0, 1), step=(30, 0.2),
     a.axis["left"].toggle(ticklabels=ticklabels, label=bool(rlabel))
 
     # add labels:
-    a.axis["top"].label.set_text(thlabel)
-    a.axis["left"].label.set_text(rlabel)
+    #a.axis["top"].label.set_text(thlabel)
+    #a.axis["left"].label.set_text(rlabel)
 
     #Remove axes, its a sonar image :)
     a.axis["top"].set_visible(False)
@@ -136,17 +136,23 @@ def fractional_polar_axes(f, thlim=(0, 180), rlim=(0, 1), step=(30, 0.2),
     # add sector lines for both dimensions:
     thticks = grid_helper.grid_info['lon_info'][0]
     rticks = grid_helper.grid_info['lat_info'][0]
-    for th in thticks[1:-1]: # all but the first and last
-        auxa.plot([th, th], [r0, r1], '--', c='grey', zorder=-1)
-    for ri, r in enumerate(rticks):
+    #for th in thticks[1:-1]: # all but the first and last
+    #    auxa.plot([th, th], [r0, r1], '--', c='grey', zorder=-1)
+    #for ri, r in enumerate(rticks):
         # plot first r line as axes border in solid black only if it isn't at r=0
-        if ri == 0 and r != 0:
-            ls, lw, color = 'solid', 2, 'black'
-        else:
-            ls, lw, color = 'dashed', 1, 'grey'
+        #if ri == 0 and r != 0:
+        #    ls, lw, color = 'solid', 0.01, 'black'
+        #else:
+        #    ls, lw, color = 'dashed', 0.01, 'grey'
         # From http://stackoverflow.com/a/19828753/2020363
-        auxa.add_artist(plt.Circle([0, 0], radius=r, ls=ls, lw=lw, color=color, fill=False,
-                        transform=auxa.transData._b, zorder=-1))
+        #auxa.add_artist(plt.Circle([0, 0], radius=r, ls=ls, lw=lw, color=color, fill=False,
+        #                transform=auxa.transData._b, zorder=-1))
+
+    auxa.set_axis_off()
+    auxa.axis("tight")
+    auxa.axis("image")
+    auxa.get_xaxis().set_visible(False)
+    auxa.get_yaxis().set_visible(False)
     return auxa
 
 
